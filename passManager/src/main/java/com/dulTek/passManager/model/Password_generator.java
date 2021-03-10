@@ -1,14 +1,15 @@
 package com.dulTek.passManager.model;
 
-public class password_generator {
+public class Password_generator {
 	private int length;
 	private int num_of_passwords;
 	private String[] randomPasswords;
 
-	public password_generator(int length, int num_of_password) {
+	public Password_generator(int length, int num_of_passwords) {
 		this.length = length;
-		this.num_of_passwords = num_of_password;
+		this.num_of_passwords = num_of_passwords;
 		this.randomPasswords = new String[num_of_passwords];
+		randomPassword();
 	}
 
 	public int getLength() {
@@ -36,7 +37,6 @@ public class password_generator {
 	}
 
 	public void randomPassword() {
-		System.out.println("Random password method called");
 		// Randomly generate passwords total number of times
 		for (int i = 0; i < num_of_passwords; i++) {
 			// Create a variable to store the random password
