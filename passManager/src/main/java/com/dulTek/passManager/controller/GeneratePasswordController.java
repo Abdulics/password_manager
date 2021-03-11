@@ -9,13 +9,14 @@ import com.dulTek.passManager.model.Password_generator;
 
 @Controller
 public class GeneratePasswordController {
-	
+
 	@RequestMapping("passGen")
 	public ModelAndView passGen(Password_generator pwg) {
 		ModelAndView mv = new ModelAndView();
-		pwg.randomPassword();
 		mv.addObject("obj", pwg);
 		mv.setViewName("home");
+		System.out.println("Length is: "+pwg.getLength());
+		System.out.println("Generated password is: "+pwg.getRandomPasswords());
 		return mv;
 	}
 }

@@ -1,6 +1,6 @@
 package com.dulTek.passManager.model;
 
-public class password_management {
+public class Password_management {
 	private String web_url;
 	private String web_username;
 	private String web_password;

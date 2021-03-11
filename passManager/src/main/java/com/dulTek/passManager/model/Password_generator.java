@@ -10,8 +10,10 @@ public class Password_generator {
 		this.num_of_passwords = num_of_passwords;
 		this.randomPasswords = new String[num_of_passwords];
 		randomPassword();
+		System.out.println("Length is: "+ length);
+		System.out.println("Num of pass is: "+ num_of_passwords);
 	}
-
+	
 	public int getLength() {
 		return length;
 	}

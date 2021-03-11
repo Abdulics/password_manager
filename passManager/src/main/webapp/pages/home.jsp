@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 <title>Home</title>
@@ -24,6 +24,35 @@ body, h1, h2, h3, h4, h5, h6 {
 
 .fa-anchor, .fa-coffee {
 	font-size: 200px
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #e61d07;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
 }
 </style>
 <body>
@@ -68,7 +97,7 @@ body, h1, h2, h3, h4, h5, h6 {
 			Started</a>
 	</header>
 
-	<!-- Generate password grid -->
+	<!-- Generate password for everyone -->
 	<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
 		<div class="w3-content">
 			<div class="w3-third w3-center">
@@ -92,12 +121,47 @@ body, h1, h2, h3, h4, h5, h6 {
 						password</button>
 				</form>
 				<div class="w3-section">
-					<label>Generated password</label> <input class="w3-input w3-border"
-						type="text" name="Message"> 
-					<c:forEach items="${obj.randomPasswords }" var="item">
-    <c:out value="${item}"/><br />
-					</c:forEach>
+					<h1>Generated password</h1>
+					
+					${obj.randomPasswords[0] } <br>
 				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Generate password for logged in users -->
+	<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+		<div class="w3-content">
+			<div class="w3-third w3-center">
+				<i class="fa fa-key w3-padding-64 w3-text-red w3-margin-right"></i>
+			</div>
+
+			<div class="w3-twothird" id="getstarted">
+				<h1>Generate password</h1>
+				<form action="passGen">
+					<div class="w3-section">
+						<label>Length of password</label> <input
+							class="w3-input w3-border" type="number" name="length" required>
+					</div>
+					<div class="w3-section">
+						<label>Website URL</label> <input
+							class="w3-input w3-border" type="text" name="web_url"
+							required>
+					</div>
+					<div class="w3-section">
+						<label>Web Username </label> <input
+							class="w3-input w3-border" type="text" name="web_username"
+							required>
+					</div>
+					<div class="w3-section">
+						<label>Generated password</label> <input
+							class="w3-input w3-border" type="text" name="gen_password" value=${obj.randomPasswords[0] }>
+					</div>
+						<div class="clearfix">
+      <button type="submit" class="cancelbtn"  >Generate Password</button>
+      <button type="submit" class="signupbtn">Save Password</button>
+    </div>
+				</form>
 			</div>
 		</div>
 	</div>
