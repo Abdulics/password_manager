@@ -1,9 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
-<head><link rel="stylesheet" href="mystyle.css"></head>
 <title>Home</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +12,48 @@
 	href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Lato", sans-serif
+}
+
+.w3-bar, h1, button {
+	font-family: "Montserrat", sans-serif
+}
+
+.fa-anchor, .fa-coffee {
+	font-size: 200px
+}
+
+/* Set a style for all buttons */
+button {
+	background-color: #e61d07;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+	opacity: 0.9;
+}
+
+button:hover {
+	opacity: 1;
+}
+
+/* Clear floats */
+.clearfix::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+	float: left;
+	width: 50%;
+}
+</style>
 <body>
 
 	<!-- Navbar -->
@@ -26,10 +66,13 @@
 				href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
 			<a href="#news" onclick="w3_close()"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">News</a>
-			<a href="login"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Login</a>
-			<a href="signup"
-				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Signup</a>
+
+			<a href="userprofile"
+				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Profile</a>
+			<a href="managepasswords"
+				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Manage
+				Passwords</a> <a href="logout"
+				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
 			<a href="#aboutus" onclick="w3_close()"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About
 				Us</a>
@@ -39,33 +82,23 @@
 		<div id="navDemo"
 			class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
 			<a href="#news" class="w3-bar-item w3-button w3-padding-large">News</a>
-			<a href="login" class="w3-bar-item w3-button w3-padding-large">Login</a>
-			<a href="signup" class="w3-bar-item w3-button w3-padding-large">Signup</a>
-			<a href="#aboutus" onclick="w3_close()"
+			<a href="management" class="w3-bar-item w3-button w3-padding-large">Manage
+				passwords</a> <a href="home"
+				class="w3-bar-item w3-button w3-padding-large">Logout</a> <a
+				href="#aboutus" onclick="w3_close()"
 				class="w3-bar-item w3-button w3-padding-large">About Us</a>
 		</div>
 	</div>
-
-	<!-- Header -->
-	<header class="w3-container w3-red w3-center"
-		style="padding: 128px 16px">
-		<h1 class="w3-margin w3-jumbo">DULTEK'S PASSWORD MANAGER</h1>
-		<p class="w3-xlarge">Template by w3.css</p>
-		<a href="#getstarted"
-			class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get
-			Started</a>
-	</header>
-
-	<!-- Generate password for everyone -->
+	<!-- Generate password for logged in users -->
 	<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
 		<div class="w3-content">
 			<div class="w3-third w3-center">
 				<i class="fa fa-key w3-padding-64 w3-text-red w3-margin-right"></i>
 			</div>
 
-			<div class="w3-twothird" id="getstarted">
-				<h1>Generate passwords</h1>
-				<form action="passGen">
+			<div class="w3-twothird">
+				<h1>Generate password</h1>
+				<form action="loggedPassgen">
 					<div class="w3-section">
 						<label>Length of password</label> <input
 							class="w3-input w3-border" type="number" name="length" required>
@@ -73,24 +106,39 @@
 					<div class="w3-section">
 						<label>Number of password</label> <input
 							class="w3-input w3-border" type="number" name="num_of_passwords"
-							value=1 readonly required>
+							value=1 readonly>
 					</div>
-					<button type="submit"
-						class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Generate
-						password</button>
+					<div class="clearfix">
+						<button type="submit"
+							class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Generate
+							password</button>
+					</div>
 				</form>
-				<div class="w3-section">
-					<h1>Generated password</h1>
 
-					<input
+				<form action="management">
+					<div class="w3-section">
+						<label>Website URL</label> <input class="w3-input w3-border"
+							type="text" name="web_url" required>
+					</div>
+					<div class="w3-section">
+						<label>Web Username </label> <input class="w3-input w3-border"
+							type="text" name="web_username" required>
+					</div>
+					<div class="w3-section">
+						<label>Generated password</label> <input
 							class="w3-input w3-border" type="text" name="gen_password"
 							value=${obj.randomPasswords[0] }>
-					
-				</div>
+					</div>
+					<div class="clearfix">
+						<button type="submit"
+							class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Save
+							password</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- First Grid -->
 	<div class="w3-row-padding w3-padding-64 w3-container" id="aboutus">
 		<div class="w3-content">

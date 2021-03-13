@@ -1,5 +1,8 @@
 package com.dulTek.passManager.model;
 
+import org.springframework.stereotype.Component;
+
+//@Component
 public class Password_generator {
 	private int length;
 	private int num_of_passwords;
@@ -7,7 +10,11 @@ public class Password_generator {
 
 	public Password_generator(int length, int num_of_passwords) {
 		this.length = length;
+		if(num_of_passwords == 0) {
+			this.num_of_passwords = 1;
+		} else {
 		this.num_of_passwords = num_of_passwords;
+		}
 		this.randomPasswords = new String[num_of_passwords];
 		randomPassword();
 		System.out.println("Length is: "+ length);
