@@ -55,7 +55,8 @@ public class LoginLogoutSignupController {
 //		return "signupComfirmation";
 //	}
 	
-	@RequestMapping(value = "/usersignup", method = RequestMethod.POST)
+	//@RequestMapping(value = "/usersignup", method = RequestMethod.POST)
+	@PostMapping("/usersignup")
 	public String saveProduct(@ModelAttribute("user") User user) {
 		System.out.println("First name is: " + user.getFirstName());
 		System.out.println(user.toString());

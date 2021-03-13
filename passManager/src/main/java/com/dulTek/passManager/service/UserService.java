@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dulTek.passManager.model.User;
 
 @Service
-@Transactional
 public class UserService {
 
 	@Autowired
