@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Sign up confirmation</title>
+</head>
+<body>
+
+ 
+    <h1>Signed up Successfully</h1>
+    <h2>Here is the submitted data</h2>
+    User ID:<p th:text="${user.id}">
+    <h5>First name:  <p th:text="${user.firstName}"></h5>
+    <h5>Last name:  <p th:text="${user.lastName}"></h5>
+    <h5>Email:  <p th:text="${user.email}"></h5>
+    <h5>User name:  <p th:text="${user.username}"></h5>
+    
+    <a href="login">Click here to login</a>
+</body>
+</html>

@@ -10,7 +10,7 @@ import com.dulTek.passManager.model.User;
 public class UserService {
 
 	@Autowired
-	private static UserRepository repo;	
+	private UserRepository repo;	
 
 //	public static String signup(User user) {
 //		repo.save(user);

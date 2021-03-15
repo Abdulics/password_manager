@@ -47,6 +47,11 @@ public class LoginLogoutSignupController {
 		return "signup";
 	}
 	
+	@RequestMapping("/signupConfirmation")
+	public String signupConfirmation() {
+		return "signupConfirmation";
+	}
+	
 //	@PostMapping("/usersignup")
 //	public String signup(@ModelAttribute("User") User user, Model model) {
 //		ModelAndView mv = new ModelAndView();
@@ -58,9 +63,10 @@ public class LoginLogoutSignupController {
 	//@RequestMapping(value = "/usersignup", method = RequestMethod.POST)
 	@PostMapping("/usersignup")
 	public String saveProduct(@ModelAttribute("user") User user) {
+		//"redirect:/"
 		System.out.println("First name is: " + user.getFirstName());
 		System.out.println(user.toString());
 	    service.save(user); 
-	    return "redirect:/";
+	    return "signupConfirmation";
 	}
 }
