@@ -1,6 +1,7 @@
 package com.dulTek.passManager.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,22 +20,30 @@ public class PasswordManagementController {
 	}
 	
 	@RequestMapping("passGen")
-	public ModelAndView passGen(Password_generator pwg) {
+	public ModelAndView passGen(@ModelAttribute("generatedpasswords")Password_generator pwg) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("obj", pwg);
+		mv.addObject("generatedpasswords", pwg);
 		mv.setViewName("home");
 		System.out.println("Length is: "+pwg.getLength());
-		System.out.println("Generated password is: "+pwg.getRandomPasswords());
+		pwg.setRandomPasswords(pwg.getLength());
+		pwg.setNumpasswords(pwg.getNumpasswords());
+		pwg.randomPassword();
+		String[] p = pwg.getRandomPasswords();
+		System.out.println("Generated password is: "+p[0]);
 		return mv;
 	}
 	
 	@RequestMapping("loggedPassgen")
-	public ModelAndView loggedPassGen(Password_generator pwg) {
+	public ModelAndView loggedPassGen(@ModelAttribute("generatedpasswords")Password_generator pwg) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("obj", pwg);
+		mv.addObject("generatedpasswords", pwg);
 		mv.setViewName("userpage");
+		pwg.setRandomPasswords(pwg.getLength());
+		pwg.setNumpasswords(pwg.getNumpasswords());
+		pwg.randomPassword();
+		String[] p = pwg.getRandomPasswords();
 		System.out.println("Length is: "+pwg.getLength());
-		System.out.println("Generated password is: "+pwg.getRandomPasswords());
+		System.out.println("Generated password is: "+p[0]);
 		return mv;
 	}
 }

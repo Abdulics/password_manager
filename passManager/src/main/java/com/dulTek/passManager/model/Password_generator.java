@@ -1,26 +1,30 @@
 package com.dulTek.passManager.model;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-//@Component
+@Service
 public class Password_generator {
 	private int length;
-	private int num_of_passwords;
+	private int numpasswords;
 	private String[] randomPasswords;
 
 	public Password_generator(int length, int num_of_passwords) {
 		this.length = length;
-		if(num_of_passwords == 0) {
-			this.num_of_passwords = 1;
+		if (num_of_passwords == 0) {
+			this.numpasswords = 1;
 		} else {
-		this.num_of_passwords = num_of_passwords;
+			this.numpasswords = num_of_passwords;
 		}
 		this.randomPasswords = new String[num_of_passwords];
 		randomPassword();
-		System.out.println("Length is: "+ length);
-		System.out.println("Num of pass is: "+ num_of_passwords);
+		System.out.println("Length is: " + length);
+		System.out.println("Num of pass is: " + num_of_passwords);
 	}
-	
+
+	public Password_generator() {
+		randomPassword();
+	}
+
 	public int getLength() {
 		return length;
 	}
@@ -29,25 +33,33 @@ public class Password_generator {
 		this.length = length;
 	}
 
-	public int getNum_of_password() {
-		return num_of_passwords;
+	public int getNumpasswords() {
+		return numpasswords;
 	}
 
-	public void setNum_of_password(int num_of_password) {
-		this.num_of_passwords = num_of_password;
+	public void setNumpasswords(int numpasswords) {
+		this.numpasswords = numpasswords;
 	}
 
 	public String[] getRandomPasswords() {
+//		if(randomPasswords.equals(null)) {
+//			System.out.println("Null password detected.... assigning an empty string");
+//			randomPasswords[0] = " ";
+//		}
 		return randomPasswords;
 	}
 
 	public void setRandomPasswords(String[] randomPasswords) {
 		this.randomPasswords = randomPasswords;
 	}
+	
+	public void setRandomPasswords(int numPasswords) {
+		this.randomPasswords =  new String[numPasswords];
+	}
 
 	public void randomPassword() {
 		// Randomly generate passwords total number of times
-		for (int i = 0; i < num_of_passwords; i++) {
+		for (int i = 0; i < numpasswords; i++) {
 			// Create a variable to store the random password
 			String randomPassword = "";
 			// Randomly generate a character for the password length number of times

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><link rel="stylesheet" href="mystyle.css"></head>
+<head>
+<link rel="stylesheet" href="mystyle.css">
+</head>
 <title>Home</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,32 +64,32 @@
 
 			<div class="w3-twothird" id="getstarted">
 				<h1>Generate passwords</h1>
-				<form action="passGen">
+				<form action="#" th:action="@{/passGen}"
+					th:object="${generatedpasswords}" method="post">
 					<div class="w3-section">
 						<label>Length of password</label> <input
-							class="w3-input w3-border" type="number" name="length" required>
+							class="w3-input w3-border" type="number" name="length" required
+							th:field="*{length}">
 					</div>
 					<div class="w3-section">
 						<label>Number of password</label> <input
 							class="w3-input w3-border" type="number" name="num_of_passwords"
-							value=1 readonly required>
+							required th:field="*{numpasswords}">
 					</div>
 					<button type="submit"
 						class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom">Generate
 						password</button>
 				</form>
 				<div class="w3-section">
-					<h1>Generated password</h1>
-
-					<input
-							class="w3-input w3-border" type="text" name="gen_password"
-							value=${obj.randomPasswords[0] }>
-					
+					<h1>Generated passwords</h1>
+					<ul th:each="password : ${generatedpasswords.randomPasswords}">
+						<h3 th:text="${password}"></h3>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- First Grid -->
 	<div class="w3-row-padding w3-padding-64 w3-container" id="aboutus">
 		<div class="w3-content">

@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dulTek.passManager.model.Password_generator;
 import com.dulTek.passManager.model.User;
 import com.dulTek.passManager.service.UserService;
 
 @Controller
 public class LoginLogoutSignupController {
 	
+	@Autowired
+	Password_generator gen;
 	@Autowired
 	private UserService service;
 	@Autowired
@@ -27,7 +30,8 @@ public class LoginLogoutSignupController {
 	}
 	
 	@RequestMapping("/securedpage")
-	public String securedPage() {
+	public String securedPage(Model model) {
+		model.addAttribute("generatedpasswords", gen);
 		return "userpage";
 	}
 	
