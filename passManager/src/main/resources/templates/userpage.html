@@ -100,7 +100,8 @@ button:hover {
 					th:object="${generatedpasswords}">
 					<div class="w3-section">
 						<label>Length of password</label> <input
-							class="w3-input w3-border" type="number" name="length" required th:field="*{length}">
+							class="w3-input w3-border" type="number" name="length" required
+							th:field="*{length}">
 					</div>
 					<div class="w3-section">
 						<label>Number of password</label> <input
@@ -114,20 +115,24 @@ button:hover {
 					</div>
 				</form>
 
-				<form action="management">
+				<form action="#" th:action="@{/management}"
+					th:object="${managedPass}" method="get">
+					<div class="w3-section">
+						 <input
+							type="hidden" name="username" value="Aomar" th:field="*{username}">
+					</div>
 					<div class="w3-section">
 						<label>Website URL</label> <input class="w3-input w3-border"
-							type="text" name="web_url" required>
+							type="text" name="web_url" required th:field="*{webUrl}">
 					</div>
 					<div class="w3-section">
 						<label>Web Username </label> <input class="w3-input w3-border"
-							type="text" name="web_username" required>
+							type="text" name="web_username" required th:field="*{webUsername}">
 					</div>
 					<div class="w3-section">
-						<label>Generated password</label> <input class="w3-input w3-border"
-							 type="text"
-							 name="gen_password"
-							th:value="${generatedpasswords.randomPasswords[0]}">
+						<label>Generated password</label> <input
+							class="w3-input w3-border" type="text" name="gen_password"
+							th:value="${generatedpasswords.randomPasswords}" th:field="*{webPassword}">
 					</div>
 					<div class="clearfix">
 						<button type="submit"

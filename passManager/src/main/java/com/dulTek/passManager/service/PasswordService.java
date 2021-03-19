@@ -1,10 +1,12 @@
 package com.dulTek.passManager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.dulTek.passManager.model.Password_management;
 import com.dulTek.passManager.model.User;
 
+@Service
 public class PasswordService {
 	@Autowired
 	private PasswordsRepository repo;
