@@ -2,7 +2,10 @@ package com.dulTek.passManager.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +14,9 @@ import org.springframework.stereotype.Service;
 @Table(name = "userspasswords")
 public class Password_management {
 	@Id
-	//@Column(name = "id", updatable = false)
-	//private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false)
+	private Long id;
 	private String username;
 	private String webUrl;
 	private String webUsername;

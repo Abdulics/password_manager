@@ -10,7 +10,7 @@
 	href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
+<style type="text/css">
 body, h1, h2, h3, h4, h5, h6 {
 	font-family: "Lato", sans-serif
 }
@@ -80,7 +80,7 @@ button:hover {
 		<div id="navDemo"
 			class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
 			<a href="#news" class="w3-bar-item w3-button w3-padding-large">News</a>
-			<a href="management" class="w3-bar-item w3-button w3-padding-large">Manage
+			<a href="passwordmanagement" class="w3-bar-item w3-button w3-padding-large">Manage
 				passwords</a> <a href="home"
 				class="w3-bar-item w3-button w3-padding-large">Logout</a> <a
 				href="#aboutus" onclick="w3_close()"
@@ -106,7 +106,7 @@ button:hover {
 					<div class="w3-section">
 						<label>Number of password</label> <input
 							class="w3-input w3-border" type="number" name="num_of_passwords"
-							value=1 th:field="*{numpasswords}">
+							th:value="1" th:field="*{numpasswords}">
 					</div>
 					<div class="clearfix">
 						<button type="submit"
@@ -118,8 +118,8 @@ button:hover {
 				<form action="#" th:action="@{/management}"
 					th:object="${managedPass}" method="get">
 					<div class="w3-section">
-						 <input
-							type="hidden" name="username" value="Aomar" th:field="*{username}">
+						<label>Username</label><input class="w3-input w3-border" type="text" name="username" value="Aomar"
+							th:field="*{username}">
 					</div>
 					<div class="w3-section">
 						<label>Website URL</label> <input class="w3-input w3-border"
@@ -127,12 +127,14 @@ button:hover {
 					</div>
 					<div class="w3-section">
 						<label>Web Username </label> <input class="w3-input w3-border"
-							type="text" name="web_username" required th:field="*{webUsername}">
+							type="text" name="web_username" required
+							th:field="*{webUsername}">
 					</div>
 					<div class="w3-section">
 						<label>Generated password</label> <input
 							class="w3-input w3-border" type="text" name="gen_password"
-							th:value="${generatedpasswords.randomPasswords}" th:field="*{webPassword}">
+							th:attr="value = ${generatedpasswords.randomPasswords[0]}"
+							th:field="*{webPassword}">
 					</div>
 					<div class="clearfix">
 						<button type="submit"
@@ -142,6 +144,13 @@ button:hover {
 				</form>
 			</div>
 		</div>
+	</div>
+
+	<div class="w3-section">
+		<h1>Generated passwords</h1>
+		<ul th:each="password : ${generatedpasswords.randomPasswords}">
+			<h3 th:text="${password}"></h3>
+		</ul>
 	</div>
 
 	<!-- First Grid -->
@@ -223,7 +232,7 @@ button:hover {
 		</p>
 	</footer>
 
-	<script>
+	<script type="text/javascript">
 		// Used to toggle the menu on small screens when clicking on the menu button
 		function myFunction() {
 			var x = document.getElementById("navDemo");
