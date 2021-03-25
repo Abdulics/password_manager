@@ -1,5 +1,7 @@
 package com.dulTek.passManager.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,8 @@ public class PasswordService {
 		repo.save(m);
     }
      
-    public Password_management get(String uname) {
-        return repo.findById(uname).get();
+    public List<Password_management> getPasswords(String uname) {
+        return repo.findAllByUsername(uname);
     }
      
 //    public void delete(long id) {

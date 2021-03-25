@@ -1,5 +1,11 @@
 package com.dulTek.passManager.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -12,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dulTek.passManager.model.Password_generator;
+import com.dulTek.passManager.model.Password_management;
 import com.dulTek.passManager.model.User;
+import com.dulTek.passManager.model.UserDetails;
 import com.dulTek.passManager.service.UserService;
 
 @Controller
@@ -24,20 +32,28 @@ public class LoginLogoutSignupController {
 	private UserService service;
 	@Autowired
 	private User user;
+	@Autowired
+	UserDetails uD;
+	@Autowired
+	Password_management mgn;
 	@RequestMapping("/login")
-	public String login() {
+	public String login(Model model, HttpSession session) {
+		List<String> passMan = (List<String>) session.getAttribute("PASSWORDMANAGER_SESSION");
+		model.addAttribute("passwordManagerSession", passMan!=null? passMan:new ArrayList<>());
+		model.addAttribute("userDetails",uD);
 		return "login";
 	}
 	
 	@RequestMapping("/securedpage")
-	public String securedPage(Model model) {
+	public String securedPage(@ModelAttribute("userDetails") UserDetails ud,Model model, HttpServletRequest request) {
+		String[] randomPasswords = new String[5];
+		randomPasswords[0] = "password will be populated here";
+		gen.setRandomPasswords(randomPasswords);
 		model.addAttribute("generatedpasswords", gen);
+		model.addAttribute("managedPass", mgn);
+		model.addAttribute("userD", ud);
+		System.out.println("user anme in secured page is:" + ud.getUsername());
 		return "userpage";
-	}
-	
-	@RequestMapping("/htmlpage")
-	public String html() {
-		return "htmlpage";
 	}
 	
 	@RequestMapping("/html")

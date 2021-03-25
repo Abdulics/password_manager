@@ -71,7 +71,7 @@ span.psw {
 <h2>Login Form</h2>
 
 <form action="#" th:action="@{/securedpage}"
-					th:object="${UserDetails}" method="post">
+					th:object="${userDetails}" method="post">
   <div class="imgcontainer">
     <img src="img_avatar2.png" alt="Avatar" class="avatar">
   </div>
@@ -81,7 +81,7 @@ span.psw {
     <input type="text" placeholder="Enter Username" name="uname" required th:field="*{username}">
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required th:field="*{passwords}">
+    <input type="password" placeholder="Enter Password" name="psw" required th:field="*{password}">
         
     <button type="submit">Login</button>
     <label>

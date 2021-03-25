@@ -1,17 +1,19 @@
 package com.dulTek.passManager.model;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-@Scope("session")
+//@Component
+//@Scope("session")
+@Service
 public class UserDetails {
 	private String username;
-	private String passwords;
+	private String password;
 	
-	public UserDetails(String username, String passwords) {
+	public UserDetails() {
+	}
+	public UserDetails(String username, String password) {
 		this.username = username;
-		this.passwords = passwords;
+		this.password = password;
 	}
 	public String getUsername() {
 		return username;
@@ -19,11 +21,11 @@ public class UserDetails {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getPasswords() {
-		return passwords;
+	public String getPassword() {
+		return password;
 	}
-	public void setPasswords(String passwords) {
-		this.passwords = passwords;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	

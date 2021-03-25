@@ -67,7 +67,7 @@ button:hover {
 
 			<a href="userprofile"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Profile</a>
-			<a href="managepasswords"
+			<a href="passwordmanagement"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Manage
 				Passwords</a> <a href="logout"
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Logout</a>
@@ -75,15 +75,26 @@ button:hover {
 				class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">About
 				Us</a>
 		</div>
+		<form action="#" th:action="@{/passwordmanagement}"
+			th:object="${userD}" method="post">
+			<div class="w3-section">
+				<input class="w3-input w3-border" type="hidden" th:name="username"
+					th:id="username" th:value=${userD.username} required> <input
+					class="w3-input w3-border" type="hidden" th:name="username"
+					th:id="username" th:value=${userD.password} required>
+			</div>
+			<button type="submit" class="w3-button w3-padding-small w3-red">Manage
+				passwords</button>
+		</form>
 
 		<!-- Navbar on small screens -->
 		<div id="navDemo"
 			class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
 			<a href="#news" class="w3-bar-item w3-button w3-padding-large">News</a>
-			<a href="passwordmanagement" class="w3-bar-item w3-button w3-padding-large">Manage
-				passwords</a> <a href="home"
-				class="w3-bar-item w3-button w3-padding-large">Logout</a> <a
-				href="#aboutus" onclick="w3_close()"
+			<a href="passwordmanagement"
+				class="w3-bar-item w3-button w3-padding-large">Manage passwords</a>
+			<a href="home" class="w3-bar-item w3-button w3-padding-large">Logout</a>
+			<a href="#aboutus" onclick="w3_close()"
 				class="w3-bar-item w3-button w3-padding-large">About Us</a>
 		</div>
 	</div>
@@ -99,14 +110,19 @@ button:hover {
 				<form action="#" th:action="@{/loggedPassgen}"
 					th:object="${generatedpasswords}">
 					<div class="w3-section">
+						<input class="w3-input w3-border" type="hidden" th:name="username"
+							th:id="username" th:value=${userD.username} required>
+					</div>
+
+					<div class="w3-section">
 						<label>Length of password</label> <input
 							class="w3-input w3-border" type="number" name="length" required
 							th:field="*{length}">
 					</div>
 					<div class="w3-section">
 						<label>Number of password</label> <input
-							class="w3-input w3-border" type="number" name="num_of_passwords"
-							th:value="1" th:field="*{numpasswords}">
+							class="w3-input w3-border" type="number" th:name="numpasswords"
+							th:value="1" th:id="numpasswords" readonly>
 					</div>
 					<div class="clearfix">
 						<button type="submit"
@@ -116,10 +132,11 @@ button:hover {
 				</form>
 
 				<form action="#" th:action="@{/management}"
-					th:object="${managedPass}" method="get">
+					th:object="${managedPass}" method="post">
 					<div class="w3-section">
-						<label>Username</label><input class="w3-input w3-border" type="text" name="username" value="Aomar"
-							th:field="*{username}">
+						<label>Username</label><input class="w3-input w3-border"
+							type="text" th:name="username" th:id="username"
+							th:value=${userD.username} required readonly>
 					</div>
 					<div class="w3-section">
 						<label>Website URL</label> <input class="w3-input w3-border"
@@ -127,14 +144,14 @@ button:hover {
 					</div>
 					<div class="w3-section">
 						<label>Web Username </label> <input class="w3-input w3-border"
-							type="text" name="web_username" required
+							type="text" name="webUsername" required
 							th:field="*{webUsername}">
 					</div>
 					<div class="w3-section">
 						<label>Generated password</label> <input
 							class="w3-input w3-border" type="text" name="gen_password"
-							th:attr="value = ${generatedpasswords.randomPasswords[0]}"
-							th:field="*{webPassword}">
+							th:value=${generatedpasswords.randomPasswords[0]} required
+							th:id="webPassword" th:name="webPassword">
 					</div>
 					<div class="clearfix">
 						<button type="submit"
@@ -145,14 +162,6 @@ button:hover {
 			</div>
 		</div>
 	</div>
-
-	<div class="w3-section">
-		<h1>Generated passwords</h1>
-		<ul th:each="password : ${generatedpasswords.randomPasswords}">
-			<h3 th:text="${password}"></h3>
-		</ul>
-	</div>
-
 	<!-- First Grid -->
 	<div class="w3-row-padding w3-padding-64 w3-container" id="aboutus">
 		<div class="w3-content">
