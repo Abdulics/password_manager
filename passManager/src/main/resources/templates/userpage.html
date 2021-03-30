@@ -79,11 +79,9 @@ button:hover {
 			th:object="${userD}" method="post">
 			<div class="w3-section">
 				<input class="w3-input w3-border" type="hidden" th:name="username"
-					th:id="username" th:value=${userD.username} required> <input
-					class="w3-input w3-border" type="hidden" th:name="username"
-					th:id="username" th:value=${userD.password} required>
+					th:id="username" th:value=${userD.username} required> 
 			</div>
-			<button type="submit" class="w3-button w3-padding-small w3-red">Manage
+			<button type="submit" >Manage
 				passwords</button>
 		</form>
 

@@ -21,8 +21,8 @@ public class PasswordService {
         return repo.findAllByUsername(uname);
     }
      
-//    public void delete(long id) {
-//        repo.deleteById(id);
-//    }
+    public void delete(long id) {
+        repo.deleteById(id);
+    }
 
 }

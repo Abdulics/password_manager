@@ -21,6 +21,8 @@ public class PasswordManagementController {
 	@Autowired
 	Password_management mgn;
 	@Autowired
+	List<Password_management> pmgn;
+	@Autowired
 	UserDetails uD;
 	@Autowired
 	private PasswordService service;
@@ -28,25 +30,51 @@ public class PasswordManagementController {
 	public String passGen(@ModelAttribute("managedPass")Password_management pm, @ModelAttribute("userD") UserDetails ud,Model model) {
 		//Model mv = new Model();
 		service.save(pm);
-		List<Password_management> passwords = service.getPasswords(ud.getUsername());
-	    model.addAttribute("passwords", passwords);
+		//List<Password_management> passwords = service.getPasswords(ud.getUsername());
+		pmgn = service.getPasswords(ud.getUsername());
+	    model.addAttribute("passwords", pmgn);
 		model.addAttribute("userD", ud);
 		model.addAttribute("uname", pm.getUsername());
+		System.out.println("password manager username is now: "+ud.getUsername());
+		System.out.println("passwordfrom data base are: "+pmgn.toString());
 		return "passwords";
 	}
 	
 	@RequestMapping("/passwordmanagement")
 	public String getPass(@ModelAttribute("userD") UserDetails ud, Model model) {
-		List<Password_management> passwords = service.getPasswords(ud.getUsername());
-		
-	    model.addAttribute("passwords", passwords);
+		//List<Password_management> passwords = service.getPasswords(ud.getUsername());
+		pmgn = service.getPasswords(ud.getUsername());
+	    model.addAttribute("passwords", pmgn);
 		System.out.println("password mamager username is now: "+ud.getUsername());
 		model.addAttribute("userD", ud);
 		//System.out.println("passwordfrom data base are: "+passwords.get(0).getWebUrl());
+		System.out.println("passwords from data base are: "+pmgn.toString());
 		return "passwords";
 	}
 	
-	
+//	@RequestMapping("/delete")
+//	public String delPass(@ModelAttribute("userD") UserDetails ud, Model model) {
+//		//List<Password_management> passwords = service.getPasswords(ud.getUsername());
+//		pmgn = service.getPasswords(ud.getUsername());
+//	    model.addAttribute("passwords", pmgn);
+//		System.out.println("password mamager username is now: "+ud.getUsername());
+//		model.addAttribute("userD", ud);
+//		//System.out.println("passwordfrom data base are: "+passwords.get(0).getWebUrl());
+//		System.out.println("passwords from data base are: "+pmgn.toString());
+//		return "passwords";
+//	}
+//	
+//	@RequestMapping("/edit")
+//	public String editPass(@ModelAttribute("userD") UserDetails ud, Model model) {
+//		//List<Password_management> passwords = service.getPasswords(ud.getUsername());
+//		//pmgn = service.getPasswords(ud.getUsername());
+//	    model.addAttribute("passwords", pmgn);
+//		System.out.println("password mamager username is now: "+ud.getUsername());
+//		model.addAttribute("userD", ud);
+//		//System.out.println("passwordfrom data base are: "+passwords.get(0).getWebUrl());
+//		System.out.println("passwords from data base are: "+pmgn.toString());
+//		return "passwords";
+//	}
 	@RequestMapping("passGen")
 	public ModelAndView passGen(@ModelAttribute("generatedpasswords")Password_generator pwg) {
 		ModelAndView mv = new ModelAndView();
